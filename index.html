@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f2f6f2" />
+    <meta name="description" content="Thunai is a caring daily companion." />
+    <title>Thunai | துணை</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#today" aria-label="Thunai home">
+          <span class="brand-mark" aria-hidden="true">த</span>
+          <span><strong>Thunai</strong><small>உங்கள் துணை</small></span>
+        </a>
+        <nav class="primary-nav" aria-label="Main">
+          <button class="nav-link is-active" data-view="today" aria-current="page"><span aria-hidden="true">⌂</span><span data-i18n="navToday">Today</span></button>
+          <button class="nav-link" data-view="chat"><span aria-hidden="true">♡</span><span data-i18n="navChat">Talk to Thunai</span></button>
+          <button class="nav-link" data-view="reminders"><span aria-hidden="true">◷</span><span data-i18n="navReminders">My reminders</span></button>
+          <button class="nav-link" data-view="notes"><span aria-hidden="true">▤</span><span data-i18n="navNotes">My notes</span></button>
+          <button class="nav-link" data-view="circle"><span aria-hidden="true">◎</span><span data-i18n="navCircle">My circle</span></button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="privacy-note"><span class="privacy-dot" aria-hidden="true"></span><span data-i18n="privateNote">Notes and contacts stay on this device. Chat messages go to OpenAI.</span></div>
+          <p class="sidebar-caption">THUNAI <span aria-hidden="true">·</span> துணை</p>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <div class="mobile-brand"><span class="brand-mark" aria-hidden="true">த</span><strong>Thunai</strong></div>
+          <div class="access-tools" aria-label="Accessibility and language settings">
+            <div class="text-size" role="group" aria-label="Text size">
+              <button type="button" class="tool-button text-small" data-size="small" aria-label="Decrease text size">A−</button>
+              <button type="button" class="tool-button text-large" data-size="large" aria-label="Increase text size">A+</button>
+            </div>
+            <button type="button" class="tool-button contrast-toggle" aria-pressed="false" data-i18n="contrast">High contrast</button>
+            <div class="language-switch" role="group" aria-label="Language">
+              <button type="button" class="language-button is-selected" data-language="en" aria-pressed="true">English</button>
+              <button type="button" class="language-button" data-language="ta" aria-pressed="false">தமிழ்</button>
+            </div>
+          </div>
+        </header>
+
+        <main id="main" tabindex="-1">
+          <section class="view is-visible" id="view-today" aria-labelledby="page-title">
+            <div class="welcome-row">
+              <div>
+                <p class="eyebrow" data-i18n="todayLabel">YOUR DAY, AT YOUR PACE</p>
+                <h1 id="page-title" data-i18n="welcomeTitle">Good to see you.</h1>
+                <p class="welcome-copy" data-i18n="welcomeCopy">A little company, whenever you need it.</p>
+              </div>
+              <div class="date-chip"><span class="date-sun" aria-hidden="true"></span><span id="current-date">Today</span></div>
+            </div>
+
+            <div class="today-grid">
+              <section class="panel checkin-panel" aria-labelledby="checkin-title">
+                <div class="panel-heading">
+                  <div><p class="eyebrow" data-i18n="dailyCheckin">DAILY CHECK-IN</p><h2 id="checkin-title" data-i18n="howAreYou">How are you feeling?</h2></div>
+                  <span class="panel-index" aria-hidden="true">01</span>
+                </div>
+                <div class="mood-options" role="group" aria-label="Choose how you are feeling">
+                  <button class="mood-button" data-mood="great" aria-pressed="false"><span class="mood-face" aria-hidden="true">☺</span><span data-i18n="moodGreat">Good</span></button>
+                  <button class="mood-button" data-mood="okay" aria-pressed="false"><span class="mood-face" aria-hidden="true">◡</span><span data-i18n="moodOkay">Okay</span></button>
+                  <button class="mood-button" data-mood="low" aria-pressed="false"><span class="mood-face" aria-hidden="true">☹</span><span data-i18n="moodLow">A little low</span></button>
+                  <button class="mood-button" data-mood="unwell" aria-pressed="false"><span class="mood-face" aria-hidden="true">＋</span><span data-i18n="moodUnwell">Not well</span></button>
+                </div>
+                <label class="field-label" for="checkin-note" data-i18n="anythingToShare">Anything you'd like to share? (optional)</label>
+                <textarea id="checkin-note" rows="2" maxlength="500" data-i18n-placeholder="checkinPlaceholder" placeholder="Write a few words..."></textarea>
+                <div class="panel-footer"><p class="status-message" id="checkin-status" role="status" aria-live="polite"></p><button class="button button-primary" id="save-checkin" type="button" data-i18n="saveCheckin">Save check-in</button></div>
+              </section>
+
+              <section class="panel chat-prompt-panel" aria-labelledby="chat-prompt-title">
+                <div class="panel-heading">
+                  <div><p class="eyebrow" data-i18n="hereForYou">HERE FOR YOU</p><h2 id="chat-prompt-title" data-i18n="talkHeading">Would you like to talk?</h2></div>
+                  <span class="chat-spark" aria-hidden="true">✳</span>
+                </div>
+                <p class="panel-copy" data-i18n="talkCopy">Share what is on your mind. Thunai is ready to listen.</p>
+                <label class="visually-hidden" for="quick-message" data-i18n="messageLabel">Your message</label>
+                <textarea id="quick-message" rows="3" maxlength="4000" data-i18n-placeholder="quickPlaceholder" placeholder="Type a message for Thunai..."></textarea>
+                <button class="button button-dark button-full" id="start-chat" type="button"><span data-i18n="startConversation">Start a conversation</span><span aria-hidden="true">↗</span></button>
+                <p class="gentle-note" data-i18n="notMedical">Not medical advice. Messages go to OpenAI for replies; avoid sharing sensitive details.</p>
+              </section>
+
+              <section class="panel reminder-panel" aria-labelledby="reminder-title">
+                <div class="panel-heading compact-heading"><div><p class="eyebrow" data-i18n="rememberTogether">A GENTLE NUDGE</p><h2 id="reminder-title" data-i18n="upcomingReminders">Your reminders</h2></div><button class="text-action" data-open="reminder-dialog" type="button" data-i18n="addOne">+ Add one</button></div>
+                <div id="today-reminders" class="reminder-list"></div>
+                <button class="link-button" data-view="reminders" type="button"><span data-i18n="seeReminders">See all reminders</span><span aria-hidden="true">→</span></button>
+              </section>
+
+              <section class="emergency-panel" aria-labelledby="emergency-title">
+                <div class="emergency-symbol" aria-hidden="true">!</div>
+                <div><h2 id="emergency-title" data-i18n="needHelp">Need a hand?</h2><p data-i18n="helpCopy">Your trusted people are one tap away.</p></div>
+                <button class="button button-light" data-view="circle" type="button" data-i18n="viewContacts">View contacts</button>
+              </section>
+            </div>
+          </section>
+
+          <section class="view" id="view-chat" aria-labelledby="chat-title" hidden>
+            <div class="section-heading"><p class="eyebrow" data-i18n="hereForYou">HERE FOR YOU</p><h1 id="chat-title" data-i18n="chatPageTitle">A little conversation.</h1><p data-i18n="chatPageCopy">Take your time. You can talk about anything on your mind.</p></div>
+            <div class="chat-shell panel">
+              <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions text">
+                <div class="chat-message assistant-message"><span class="message-avatar" aria-hidden="true">த</span><p data-i18n="firstHello">Vanakkam. I'm here with you. What would you like to talk about?</p></div>
+              </div>
+              <form class="chat-form" id="chat-form"><label class="visually-hidden" for="chat-input" data-i18n="messageLabel">Your message</label><textarea id="chat-input" rows="2" maxlength="4000" required data-i18n-placeholder="chatPlaceholder" placeholder="Write your message here..."></textarea><button class="button button-primary send-button" type="submit"><span data-i18n="sendMessage">Send message</span><span aria-hidden="true">↑</span></button></form>
+              <p class="gentle-note" data-i18n="chatSafety">Messages are sent to OpenAI to generate replies. Avoid sensitive details. Thunai is not a doctor; in immediate danger, call local emergency services or a trusted person.</p>
+            </div>
+          </section>
+
+          <section class="view" id="view-reminders" aria-labelledby="reminders-page-title" hidden>
+            <div class="section-heading section-heading-row"><div><p class="eyebrow" data-i18n="rememberTogether">A GENTLE NUDGE</p><h1 id="reminders-page-title" data-i18n="remindersPageTitle">Things to remember.</h1><p data-i18n="remindersPageCopy">A simple list, just for you.</p></div><button class="button button-primary" data-open="reminder-dialog" type="button" data-i18n="addReminder">+ Add reminder</button></div>
+            <div class="panel list-panel"><div id="all-reminders" class="reminder-list"></div></div>
+          </section>
+
+          <section class="view" id="view-notes" aria-labelledby="notes-page-title" hidden>
+            <div class="section-heading section-heading-row"><div><p class="eyebrow" data-i18n="keepClose">KEEP CLOSE</p><h1 id="notes-page-title" data-i18n="notesPageTitle">Little things to remember.</h1><p data-i18n="notesPageCopy">Your notes stay saved on this device.</p></div><button class="button button-primary" data-open="note-dialog" type="button" data-i18n="writeNote">+ Write a note</button></div>
+            <div class="notes-grid" id="notes-list"></div>
+          </section>
+
+          <section class="view" id="view-circle" aria-labelledby="circle-page-title" hidden>
+            <div class="section-heading section-heading-row"><div><p class="eyebrow" data-i18n="peopleWhoCare">PEOPLE WHO CARE</p><h1 id="circle-page-title" data-i18n="circlePageTitle">Your trusted circle.</h1><p data-i18n="circlePageCopy">People you may want to reach quickly.</p></div><button class="button button-primary" data-open="contact-dialog" type="button" data-i18n="addContact">+ Add contact</button></div>
+            <div class="panel list-panel"><div id="contacts-list" class="contact-list"></div><p class="gentle-note" data-i18n="contactPrivacy">Contacts are saved only in this browser on this device.</p></div>
+          </section>
+        </main>
+
+        <footer class="app-footer"><span data-i18n="footerMade">Made for days that feel a little easier.</span><span data-i18n="footerPrivacy">Private by design</span></footer>
+      </div>
+    </div>
+
+    <dialog class="form-dialog" id="reminder-dialog" aria-labelledby="reminder-dialog-title">
+      <form method="dialog" id="reminder-form"><div class="dialog-heading"><div><p class="eyebrow" data-i18n="gentleReminder">GENTLE REMINDER</p><h2 id="reminder-dialog-title" data-i18n="newReminder">Add a reminder</h2></div><button class="dialog-close" value="cancel" aria-label="Close">×</button></div><label for="reminder-name" data-i18n="reminderName">What would you like to remember?</label><input id="reminder-name" name="name" maxlength="80" required /><label for="reminder-time" data-i18n="reminderTime">What time?</label><input id="reminder-time" name="time" type="time" required /><div class="dialog-actions"><button class="button button-secondary" value="cancel" data-i18n="cancel">Cancel</button><button class="button button-primary" id="save-reminder" type="submit" data-i18n="saveReminder">Save reminder</button></div></form>
+    </dialog>
+
+    <dialog class="form-dialog" id="contact-dialog" aria-labelledby="contact-dialog-title">
+      <form method="dialog" id="contact-form"><div class="dialog-heading"><div><p class="eyebrow" data-i18n="peopleWhoCare">PEOPLE WHO CARE</p><h2 id="contact-dialog-title" data-i18n="addTrustedContact">Add a trusted contact</h2></div><button class="dialog-close" value="cancel" aria-label="Close">×</button></div><label for="contact-name" data-i18n="contactName">Their name</label><input id="contact-name" name="name" maxlength="80" required /><label for="contact-phone" data-i18n="phoneNumber">Phone number</label><input id="contact-phone" name="phone" type="tel" autocomplete="tel" maxlength="30" required /><div class="dialog-actions"><button class="button button-secondary" value="cancel" data-i18n="cancel">Cancel</button><button class="button button-primary" type="submit" data-i18n="saveContact">Save contact</button></div></form>
+    </dialog>
+
+    <dialog class="form-dialog" id="note-dialog" aria-labelledby="note-dialog-title">
+      <form method="dialog" id="note-form"><div class="dialog-heading"><div><p class="eyebrow" data-i18n="keepClose">KEEP CLOSE</p><h2 id="note-dialog-title" data-i18n="writeNoteTitle">Write a note</h2></div><button class="dialog-close" value="cancel" aria-label="Close">×</button></div><label for="note-text" data-i18n="noteLabel">What would you like to remember?</label><textarea id="note-text" rows="5" maxlength="1000" required></textarea><div class="dialog-actions"><button class="button button-secondary" value="cancel" data-i18n="cancel">Cancel</button><button class="button button-primary" type="submit" data-i18n="saveNote">Save note</button></div></form>
+    </dialog>
+  </body>
+</html>
